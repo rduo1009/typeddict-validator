@@ -7,6 +7,7 @@ from typing import (
     get_args,
     get_origin,
     is_typeddict,
+    ReadOnly,
 )
 
 
