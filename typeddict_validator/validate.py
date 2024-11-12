@@ -61,6 +61,11 @@ def _validate_value(k: str, v: Any, expected: Any):
         raise DictValueTypeMismatchException(key=k, expected=expected, actual=type(v))
 
     origin_type_expected = get_origin(expected)
+    
+    if origin_type_expected is ReadOnly:
+        expected = get_args(expected)[0] 
+        origin_type_expected = get_origin(expected) or expected
+        
     if origin_type_expected is Union:
         _raise_if_mismatch(k=k, v=v, expected=expected, actual=v)
     elif origin_type_expected == list:
